@@ -3,7 +3,7 @@
 ---
 
 #! Here is just to highlight what you want to construct pipelines
-#! For the detailed configuration of products, a `products.yml` should be checked in 
+#! For the detailed configuration of products, a `products.yml` should be checked in
 #! to platform automation configuration repo, like `platform-automation-configuration/<ENV>/products.yml
 #! Check this out for your reference: https://github.com/brightzheng100/platform-automation-configuration/tree/master/dev/products.xml
 
@@ -29,13 +29,14 @@
 products:
 
 #! PAS
-- pas|elastic-runtime|cf
+# - pas|elastic-runtime|cf
+- pas|elastic-runtime|srt
 
 #! CSB
-- csb|credhub-service-broker
+# - csb|credhub-service-broker
 
 #! Redis
-- redis|p-redis
+# - redis|p-redis
 
 #! PKS
 #!- pks|pivotal-container-service

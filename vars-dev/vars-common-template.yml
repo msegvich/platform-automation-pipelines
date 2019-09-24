@@ -4,20 +4,20 @@ foundation: dev                                       # current foundation code
 
 s3:
   # S3 or S3 compatible (e.g. Minio, ECS, HCP)
-  # endpoint: https://your-s3-url                       # S3: the S3 endpoint
-  # access_key_id: ((s3_access_key_id))                 # S3: credhub: ((s3_access_key_id))
-  # secret_access_key: ((s3_secret_access_key))         # S3: credhub: ((s3_secret_access_key))
-  # region_name: ""                                     # S3: optional, regin name
+  endpoint: https://your-s3-url                       # S3: the S3 endpoint
+  access_key_id: ((s3_access_key_id))                 # S3: credhub: ((s3_access_key_id))
+  secret_access_key: ((s3_secret_access_key))         # S3: credhub: ((s3_secret_access_key))
+  region_name: ""                                     # S3: optional, regin name
 
   # GCS: if using GCS, set this and ignore above items; and enable the ops-files/resource-gcs.yml
-  gcs_json_key: ((gcs_json_key))                     # GCS: GCS' JSON key with right access permission
+  #gcs_json_key: ((gcs_json_key))                     # GCS: GCS' JSON key with right access permission
 
   buckets:
-    platform_automation: mds-platform-automation          # map bucket for platform-automation artifacts (e.g. image)
-    foundation: mds-dev                                   # map bucket for current foundation for hosting exported installation-*.zip files
+    platform_automation: platform-automation          # map bucket for platform-automation artifacts (e.g. image)
+    foundation: dev                                   # map bucket for current foundation for hosting exported installation-*.zip files
 
 credhub:
-  server: https://10.0.0.6:8844                       # CredHub endpoint
+  server: https://your-credhub-server-url             # CredHub endpoint
   ca_cert: ((credhub_ca_cert.certificate))            # CA Cert from CredHub
   client: ((credhub_client.username))                 # UAA Client for CredHub access
   secret: ((credhub_client.password))                 # UAA secret for CredHub access
@@ -25,10 +25,10 @@ credhub:
 
 git:
   configuration:                                      # The configuration repo
-    uri: "git@github.com:msegvich/platform-automation-configuration.git"
+    uri: "git@your-git-server:your-user/platform-automation-configurationgit"
     products_file: products.yml                       # The products yaml file that used to track for version changes
   user:                                               # The user for access to configuration repo
-    email: msegvich@pivotal.io                        # a dummy email will work if we're using private_key for authentication
+    email: robot@company.com                          # a dummy email will work if we're using private_key for authentication
     username: ((git_user.username))                   # a dummy username will work if we're using private_key for authentication
     password: #((git_user.password))                  # optional if we're using private_key for authentication
   private_key: ((git_private_key.private_key))        # The private for access to configuration repo
@@ -37,4 +37,4 @@ schedule:
   patch:                                              # Patch scheduler, the whole chunk will be used as ((schedule.patch))
     start: 12:00 AM                                   # by following Time Resource https://github.com/concourse/time-resource
     stop: 1:00 AM
-    location: America/Chicago
+    location: Asia/Singapore

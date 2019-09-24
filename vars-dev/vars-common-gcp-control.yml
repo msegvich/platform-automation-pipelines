@@ -13,8 +13,8 @@ s3:
   gcs_json_key: ((gcs_json_key))                     # GCS: GCS' JSON key with right access permission
 
   buckets:
-    platform_automation: mds-platform-automation          # map bucket for platform-automation artifacts (e.g. image)
-    foundation: mds-dev                                   # map bucket for current foundation for hosting exported installation-*.zip files
+    platform_automation: platform-automation          # map bucket for platform-automation artifacts (e.g. image)
+    foundation: dev                                   # map bucket for current foundation for hosting exported installation-*.zip files
 
 credhub:
   server: https://10.0.0.6:8844                       # CredHub endpoint
