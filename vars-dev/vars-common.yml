@@ -11,6 +11,7 @@ s3:
 
   # GCS: if using GCS, set this and ignore above items; and enable the ops-files/resource-gcs.yml
   gcs_json_key: ((gcs_json_key))                     # GCS: GCS' JSON key with right access permission
+  gcp_json_key: ((gcs_json_key))
 
   buckets:
     platform_automation: mds-platform-automation          # map bucket for platform-automation artifacts (e.g. image)
@@ -19,18 +20,75 @@ s3:
 credhub:
   server: https://10.0.0.6:8844                       # CredHub endpoint
   ca_cert: ((credhub_ca_cert.certificate))            # CA Cert from CredHub
-  client: ((credhub_client.username))                 # UAA Client for CredHub access
-  secret: ((credhub_client.password))                 # UAA secret for CredHub access
+  # ca_cert: |
+  #   -----BEGIN CERTIFICATE-----
+  #   MIIEZDCCAsygAwIBAgIRANbA98/PkWXwonRacD569XkwDQYJKoZIhvcNAQELBQAw
+  #   OzEMMAoGA1UEBhMDVVNBMRYwFAYDVQQKEw1DbG91ZCBGb3VuZHJ5MRMwEQYDVQQD
+  #   EwpDcmVkSHViIENBMB4XDTE5MDkyMzE5MzQyMloXDTIwMDkyMjE5MzQyMlowOzEM
+  #   MAoGA1UEBhMDVVNBMRYwFAYDVQQKEw1DbG91ZCBGb3VuZHJ5MRMwEQYDVQQDEwpD
+  #   cmVkSHViIENBMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAu6yLLuq8
+  #   du3IBdbHryUAs3csGxmYtbAZVkvqjEMzNtxAyYtHhl3m9LaRPEMQvZfMSk6KU779
+  #   H/ogGhVDoAmuUoe4834OxCj8gJGwh/7TSBkb2ChqqotBOfRCT8KShNk4PuDR+l1L
+  #   vVPK9Nj5mGGx5SQkkHT1soGOXKnICjNEB3OGVOf1Z/4Ah6mRLrKMcN2ctzcSwloK
+  #   +YPzBOX9l5NoJfVPgmZ1TRWpUI47uFn/sQ19QOBC2YwpIAH9bK/F82EfZWCp/MTU
+  #   nfUCpGSvVXNrxHVgwe0Win/uk7rqrxdpdhk1kB3XAWPteR34HLW0T4M2sEz3yQ4r
+  #   OecZ5CvzuPvB/0uPY+RlVSEaX3P8kxDLpqTCkR1y8LUcxgB2g0JZie0ooBG0AHH2
+  #   fU/Olne57y+hLvMBEA8KBaJ3JFW5GD51rzOtnPMoEk02HzSMakEZmpr1Sj58Dqwp
+  #   2epU7eJxKLtZnOvkbeqE9Z/12QPd/A+GGPvxdZSu2gKXFvc/KFSyUARhAgMBAAGj
+  #   YzBhMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRY
+  #   CTCqfQxIXWZCQxypk0P4VE976zAfBgNVHSMEGDAWgBRYCTCqfQxIXWZCQxypk0P4
+  #   VE976zANBgkqhkiG9w0BAQsFAAOCAYEArQALAgVA8eY+ldOQMWBG/HRVpTrbRVM9
+  #   76d6Y6q9vXnkH9jXHwSQwhwvWMdHg+lfqd4UurXDuEnivz9/8E8XN4xQSbESBx3s
+  #   VMQLdHUbrfmILYyU2lg3iwOT81M223JSAgvgEW9F5njanj8sSgVmaFLCYCiOAmLr
+  #   4lPOqdU3titI+0UO9lkmRw4kjhdtpd5A8+hENDUGUgznMHo5rCyySkALpMrmt1G4
+  #   hbUhM/iqUm4JK4I7XwLZWXPxwCNHD4kgEdMZ2Cv8KB1SH+pB7NUNs2FGuG3YIL/k
+  #   SKxALzmlUxxDWwsR2aZdDnNsMMwAIgRK9B8gY1wVGR01zX0jdGPW5GBCftF1qcCF
+  #   yUVOKNW7oiFm1J3U4DopfVriCvrI0X64eP7JJYsnln6tLrLUbEE9qQRSs5DLU/A0
+  #   qBk3ncad/mGPn7rWWdkFFa1oCpOwRgYhoH1gGs+e82YNnYPUm6tKDzy5u6zYQ5Qu
+  #   /037yqJdrs50TyKGwawSci7evxJ+k8Hs
+  #   -----END CERTIFICATE-----
+  #   -----BEGIN CERTIFICATE-----
+  #   MIIEfzCCAuegAwIBAgIRAJUW8zxYm6KktrK7kqpn/gQwDQYJKoZIhvcNAQELBQAw
+  #   MzEMMAoGA1UEBhMDVVNBMRYwFAYDVQQKEw1DbG91ZCBGb3VuZHJ5MQswCQYDVQQD
+  #   EwJjYTAeFw0xOTA5MjMxOTM0MjFaFw0yMDA5MjIxOTM0MjFaMDkxDDAKBgNVBAYT
+  #   A1VTQTEWMBQGA1UEChMNQ2xvdWQgRm91bmRyeTERMA8GA1UEAxMIMTAuMC4wLjYw
+  #   ggGiMA0GCSqGSIb3DQEBAQUAA4IBjwAwggGKAoIBgQDG9gW9JgKC180mxI07oy8P
+  #   TOMAxaAqWxyFoSWF1n3xEyUDy5Jqr0lUdoYUcFfZxOoZhJtJlcwML1mKGRTSbDRe
+  #   5CM7kL3+aFZDgpr4KfBS3OlcmyBk09rLSu6afBKVMVN7GqMtmhS2wcMkcEjyDCrQ
+  #   YKnLiK8eT5AgB+qRXE39K/YH08/DtSP0e6P+d9MeO7SYnyjla87yqNYU5znPaRj5
+  #   odyaRFOK1GknD+Y0S3HwBn9ugCTr/y3S/ljA+pmeojHEUVxNHllhJ7TtxZNON+Tj
+  #   HHu67hG3C4E7fjNQUW2OxEW7q7wivIo7kUvznxwoMpAgBtddCKhX4XvwQ3xQ8Bir
+  #   jBHkzmJvolGjACtlSFZBgBivQ7sRcMpwKXyU377NLLaLacx0IleqqIziSdqs+J6i
+  #   oiigDaMIXuzz463l3XlWDWhANuKCG33l+FdWb3cKUdkD+EIGMzMJtpmyNaNBWNtE
+  #   soQuITy3Rm0kQFZV6DwYz0ZPPNtWjvDscpR6coJeiBsCAwEAAaOBhzCBhDAOBgNV
+  #   HQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIwADAd
+  #   BgNVHQ4EFgQU4Ihn14YRpDTqMYRdFV/uYq/3U94wHwYDVR0jBBgwFoAUn/6vlTRH
+  #   rpYgujnzZQZZ02A4y7gwDwYDVR0RBAgwBocECgAABjANBgkqhkiG9w0BAQsFAAOC
+  #   AYEAtEQAHkhqCVeC+HWVTXKGPS7vxhtLGlWeBj8+H4Nfbg9b/70oh5dtlzwKgfJD
+  #   Zyu8wE79XsHpNE3UjffXki+Tk5NvymngfjTzlYwScvXciuxllqTjqzyAl4EN8uCz
+  #   8JnaaJmnVzmw7MOY1u15LFkXH5t5JpLRGX5CKBFvWaL189mlcz4P8WO9SFlA71hy
+  #   ZO7eAmwWPE3V2sR6AR/tE9GXuAAPieHmZwHj9ElTaD69BuDdqymk2OCk0o7BP3pE
+  #   1qKqvTuQIaAJcu9POyQnoMAwQEpsWmXmSSKj1QQ8TWmy+rkCfJZGlUSwuLz5Bz50
+  #   lSyZiJMpl+StNoJpoXVkys8Y6VgYn7K5TH+LL6zWae6EHh00Vtr10Yn/8wNik7yM
+  #   4IlftYyZZn2gz2LLncs2Sdrodr1N8nUBe4tEFvgE0vdtOvJ+dkulF/801NdYDD+3
+  #   Y8e90qIsPdxC78S97WIsGswaaRyfNzm5Qe4mIf4hQQLu1tHzNB+6jn7vr5rB6ZME
+  #   3BPn
+  #   -----END CERTIFICATE-----
+  # client: ((credhub_client.username))                 # UAA Client for CredHub access
+  client: credhub-admin
+  # secret: ((credhub_client.password))                 # UAA secret for CredHub access
+  secret: s2zogudn85mms32uq3ox
   interpolate_folders: "dev/config dev/env dev/vars"  # The folders from configuration repo (see below git.configuration) to be interpolated
 
 git:
   configuration:                                      # The configuration repo
     uri: "git@github.com:msegvich/platform-automation-configuration.git"
+    # uri: "https://github.com/msegvich/platform-automation-configuration.git"
     products_file: products.yml                       # The products yaml file that used to track for version changes
   user:                                               # The user for access to configuration repo
     email: msegvich@pivotal.io                        # a dummy email will work if we're using private_key for authentication
-    username: ((git_user.username))                   # a dummy username will work if we're using private_key for authentication
-    password: #((git_user.password))                  # optional if we're using private_key for authentication
+    username: ((git.username))                   # a dummy username will work if we're using private_key for authentication
+    password: #((git.password))                  # optional if we're using private_key for authentication
   private_key: ((git_private_key.private_key))        # The private for access to configuration repo
 
 schedule:
