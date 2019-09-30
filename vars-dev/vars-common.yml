@@ -11,7 +11,7 @@ s3:
 
   # GCS: if using GCS, set this and ignore above items; and enable the ops-files/resource-gcs.yml
   gcs_json_key: ((gcs_json_key))                     # GCS: GCS' JSON key with right access permission
-  gcp_json_key: ((gcs_json_key))
+  # gcp_json_key: ((gcs_json_key))
 
   buckets:
     platform_automation: mds-platform-automation          # map bucket for platform-automation artifacts (e.g. image)
@@ -78,7 +78,7 @@ credhub:
   client: credhub-admin
   # secret: ((credhub_client.password))                 # UAA secret for CredHub access
   secret: s2zogudn85mms32uq3ox
-  interpolate_folders: "dev/config dev/env dev/vars"  # The folders from configuration repo (see below git.configuration) to be interpolated
+  interpolate_folders: "dev/config dev/env dev/vars dev/products"  # The folders from configuration repo (see below git.configuration) to be interpolated
 
 git:
   configuration:                                      # The configuration repo
