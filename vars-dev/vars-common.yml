@@ -78,7 +78,7 @@ credhub:
   client: credhub-admin
   # secret: ((credhub_client.password))                 # UAA secret for CredHub access
   secret: s2zogudn85mms32uq3ox
-  interpolate_folders: "dev/config dev/env dev/vars"  # The folders from configuration repo (see below git.configuration) to be interpolated
+  interpolate_folders: "dev/config dev/env dev/vars dev/products"  # The folders from configuration repo (see below git.configuration) to be interpolated
 
 git:
   configuration:                                      # The configuration repo
