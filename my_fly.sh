@@ -1,3 +1,4 @@
 #! /bin/bash
 
-1-fly-install-opsman s1p dev install-opsman ops-files/resource-gcs.yml
+#GCP
+./1-fly-install-opsman.sh -t s1p -p dev -n install-opsman -o ops-files/resource-gcs.yml
