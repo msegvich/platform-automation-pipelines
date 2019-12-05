@@ -29,19 +29,19 @@
 - op: replace
   path: /resources/name=installation-before
   value:
-    name: installation
+    name: installation-before
     type: gcs-resource
     source:
       json_key: ((s3.gcs_json_key))
       bucket: ((s3.buckets.foundation))
-      regexp: installation-(.*).zip
+      regexp: installation-before(.*).zip
 
 - op: replace
   path: /resources/name=installation-after
   value:
-    name: installation
+    name: installation-after
     type: gcs-resource
     source:
       json_key: ((s3.gcs_json_key))
       bucket: ((s3.buckets.foundation))
-      regexp: installation-(.*).zip
+      regexp: installation-after(.*).zip
