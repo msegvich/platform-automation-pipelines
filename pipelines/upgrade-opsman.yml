@@ -109,10 +109,12 @@ jobs:
       env: interpolated-files
     params:
       ENV_FILE: ((foundation))/env/env.yml
+      # INSTALLATION_FILE: installation-$timestamp.zip
       INSTALLATION_FILE: installation-before-ops-manager-upgrade.zip
   - put: installation-before
     params:
       file: installation/installation-before-ops-manager-upgrade.zip
+      # file: installation/installation-$timestamp.zip
 
 # 2. upgrade-opsman
 - name: upgrade-opsman

@@ -34,7 +34,7 @@
     source:
       json_key: ((s3.gcs_json_key))
       bucket: ((s3.buckets.foundation))
-      regexp: installation-before(.*).zip
+      regexp: installation-before-(.*).zip
 
 - op: replace
   path: /resources/name=installation-after
@@ -44,4 +44,4 @@
     source:
       json_key: ((s3.gcs_json_key))
       bucket: ((s3.buckets.foundation))
-      regexp: installation-after(.*).zip
+      regexp: installation-after-(.*).zip
