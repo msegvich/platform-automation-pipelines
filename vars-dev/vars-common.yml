@@ -93,6 +93,6 @@ git:
 
 schedule:
   patch:                                              # Patch scheduler, the whole chunk will be used as ((schedule.patch))
-    start: 12:00 AM                                   # by following Time Resource https://github.com/concourse/time-resource
-    stop: 1:00 AM
+    start: 3:41 PM                                   # by following Time Resource https://github.com/concourse/time-resource
+    stop: 6:00 PM
     location: America/Chicago

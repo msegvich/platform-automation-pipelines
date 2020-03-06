@@ -45,4 +45,4 @@ products:
 - harbor|harbor-container-registry
 
 #! Compliance Scanner
-- compliance|p-compliance-scanner
+#! - compliance|p-compliance-scanner
